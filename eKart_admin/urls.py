@@ -5,6 +5,7 @@ app_name = "ekart_admin"
 
 urlpatterns = [   
    path('',views.admin_home,name="admin_home"),
+   path('log_in',views.admin_login,name="admin_login"),
    path('category/add',views.add_category,name="add_category"),
    path('category/list',views.view_category,name="view_category"),
    path('sellers/list/pending',views.pending_sellers,name="pending_sellers"),

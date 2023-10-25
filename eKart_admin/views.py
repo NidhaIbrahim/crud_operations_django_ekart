@@ -4,6 +4,9 @@ from django.shortcuts import render
 def admin_home(request):
     return render(request,'ekart_admin/admin_home.html')
 
+def admin_login(request):
+    return render(request,'ekart_admin/admin_login.html')
+
 def view_category(request):
     return render(request,'ekart_admin/view_category.html')
 
