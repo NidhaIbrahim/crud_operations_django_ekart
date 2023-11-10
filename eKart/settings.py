@@ -12,12 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-
-import mimetypes
-
-mimetypes.add_type("tex/css",".css", True)
-mimetypes.add_type("tex/js",".js", True)
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +26,6 @@ SECRET_KEY = 'django-insecure-&)lt+3vh*&^8--4y_k_*qtmj(#182kpyhbyd_y-qs0bdhple-3
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 
 # Application definition
@@ -72,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'customer.context_processor.get_category_list',
             ],
         },
     },
@@ -87,21 +81,20 @@ WSGI_APPLICATION = 'eKart.wsgi.application'
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
-#     }s
-
+#     }
 # }
 
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'ekart_db',
-        'USER' : 'postgres',
-        'PASSWORD' : 'root',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':  'ekart_db',
+        'USER': 'postgres',
+        'PASSWORD':'root',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
-    
 }
+
 
 
 # Password validation
@@ -141,6 +134,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Default primary key field type
@@ -148,10 +142,10 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'nidha4242@gmail.com'
-EMAIL_HOST_PASSWORD = 'qmjslpvmoursswxf'
+EMAIL_HOST_USER = 'fathimafida8281@gmail.com'
+EMAIL_HOST_PASSWORD = 'wpvcdgwcxcczrgja'
 EMAIL_USE_TLS = True
-
