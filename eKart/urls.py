@@ -24,5 +24,6 @@ urlpatterns = [
     path('ekart/', include('eKart_admin.urls')),
     path('seller/', include('seller.urls')),
     path('', include('customer.urls'))
-]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
+
+]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
