@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 
-from customer.models import Seller
+from seller.models import Seller
 from eKart_admin.models import Category
 from seller.models import Product
 

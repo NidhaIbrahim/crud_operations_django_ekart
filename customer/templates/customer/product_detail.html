@@ -28,11 +28,11 @@
 
                         <p>{{ product.description }}</p>
 
-
-                        <hr>
-                        <label for="">Quantity</label>
-                        <input type="number" name="quantity" min="0" max="99" value="0">
-                        <!-- <div class="row">
+                        
+                            <hr>
+                            <label for="">Quantity</label>
+                            <input type="number" name="quantity" min="0" max="99" value="0">
+                            <!-- <div class="row">
                             <div class="item-option-select">
                                 <h6>Choose Color</h6>
                                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         </div> row.// -->
-                        <!-- <div class="row">
+                            <!-- <div class="row">
                             <div class="item-option-select">
                                 <h6>Select Size</h6>
                                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
@@ -70,9 +70,21 @@
                                 </div>
                             </div>
                         </div> row.// -->
-                        <hr>
-                        <a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to cart</span>
-                            <i class="fas fa-shopping-cart"></i> </a>
+                        {% if item_exist %}
+                        <a href="" class="btn btn-primary">
+                            Go to Cart
+                        </a>
+                        {% else %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <hr>
+                            <button class="btn  btn-primary"> <span class="text">Add to
+                                    cart</span>
+                                <i class="fas fa-shopping-cart"></i> </button>
+                            {{message}}
+
+                        </form>
+                        {% endif %}
                     </article> <!-- product-info-aside .// -->
                 </main> <!-- col.// -->
             </div> <!-- row.// -->
