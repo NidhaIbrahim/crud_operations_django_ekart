@@ -1,4 +1,5 @@
 
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from random import randint
 from django.conf import settings
@@ -77,6 +78,22 @@ def remove_cart_item(request,id):
     item = Cart.objects.get(id = id)
     item.delete()
     return redirect('customer:cart')
+
+def update_cart(request):
+    product_id = request.POST['id']
+    product_quantity = request.POST['qty']
+    cart_item = Cart.objects.get(product = product_id)
+    cart_item.quantity = product_quantity
+
+    cart_item.save()
+
+    grand_total = 0
+    cart = Cart.objects.filter(customer_id = request.session['customer']).annotate(sub_total = F('quantity')* F('price'))
+    for item in cart:
+        grand_total += item.sub_total
+
+    return JsonResponse({'status':'Quantity Updated!', 'grand_total':grand_total})
+
 
 def place_order(request):
     return render(request, 'customer/place_order.html')
