@@ -79,7 +79,7 @@
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">Rs.{{ grand_total }}</dd>
+                            <dd class="text-right" id="total_price">Rs.{{ grand_total }}</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Tax:</dt>
@@ -87,7 +87,7 @@
                         </dl>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-right text-dark b"><strong>Rs.{{ grand_total }}</strong></dd>
+                            <dd class="text-right text-dark b"><strong id="grand_total">Rs.{{ grand_total }}</strong></dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">
@@ -111,8 +111,9 @@
     $('.update_cart').click(function(){
         // console.log('hello')
         let btntype = $(this).attr('data-btn-type')
-        let selecteditemid = $(this).attr('data-qty')
+        let selecteditemid = $(this).attr('data-quantity')
         let selectedtxt = document.getElementById(selecteditemid)
+        // console.log(selectedtxt)
         let currenttxtvalue = parseInt(selectedtxt.value)
         let currentitemstock = $(this).attr('data-stock')
         let selectedproductid = $(this).attr('data-product-id')
@@ -131,6 +132,33 @@
                 selectedtxt.value = decrementedvalue
             }
         }
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRFToken": '{{ csrf_token }}'
+            }
+        })
+
+        $.ajax({
+            url: "{% url 'customer:update_cart' %}",
+            method: 'POST',
+            data: {
+                id: selectedproductid,
+                qty: selectedtxt.value
+
+            },
+            success: function (response) {
+                 
+                let grandTotal = response.grand_total
+                console.log(grandTotal)
+                $('#grand_total').html('<strong>Rs.' + grandTotal + '.0</strong>')
+                $('#total_price').html('<strong>Rs.' + grandTotal + '.0</strong>')
+                
+
+
+            }
+        })
+
     })
 </script>
 <!-- ==============
